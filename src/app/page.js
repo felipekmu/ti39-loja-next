@@ -1,4 +1,5 @@
 'use client'
+import Produto from "@/components/Produto"
 import { buscaTodos } from "@/model/produtos"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -15,19 +16,13 @@ export default function Home() {
   }, [])
   
   return (
-    <div> 
-      <h1> Felipe Store </h1>
-      <p> Confira nossos produtos: </p>
+    <div className="grid grid-cols-3" place-items-center >
+
       {
         produtos == 0 ? <p> Carregando... </p> :
         produtos.map( produto =>
-          <Link href={ "/produto/"+produto.id } >
-            <div key={ produto.id }> 
-              <p> { produto.nome }</p>
-              <p> { produto.preco } </p>
-              <img src={ produto.imagem } />
-              <hr/>
-            </div>
+          <Link href={ "/produto/"+ produto.id } >
+           <Produto produto={produto} largura={150} />
           </Link>
           )
       }

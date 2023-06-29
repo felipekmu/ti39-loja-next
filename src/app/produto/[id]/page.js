@@ -1,4 +1,5 @@
 'use client'
+import Produto from "@/components/Produto";
 import { busca } from "@/model/produtos";
 import { useEffect, useState } from "react"
 
@@ -15,7 +16,7 @@ export default function ProdutoID( props ){
         carrinho.push(objeto);
         carrinho = JSON.stringify( carrinho )
         
-        localStorage.setItem("carrinho", objeto)
+        localStorage.setItem("carrinho", carrinho)
     }
     useEffect( ()=> {
         async function data(){
@@ -30,11 +31,10 @@ export default function ProdutoID( props ){
 
     return(
         produto == null ? <p> Produto não encontrado... </p>:
-        <div>
-            <h1> { produto.nome } </h1>
-            <p> { produto.descricao } </p>
-            <p> R$ { produto.preco }</p>
-            <img src={ produto.imagem } />
+        <div className="w-1/4 m-auto">
+
+            <Produto produto={produto} largura={350} />
+
             <label>
                 Quantidade:
                 <input type="number" onChange={(e)=>alteraQuantidade(e.target.value)} />
